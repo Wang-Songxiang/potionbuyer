@@ -5,7 +5,8 @@ import win32com.client
 import time
 import sys
 
-n  = int(sys.argv[1])
+with open("times.txt", "r") as f:
+    n = int(f.read())
 
 titlename = "PrincessConnectReDive"
 hwnd = win32gui.FindWindow(0, titlename)
