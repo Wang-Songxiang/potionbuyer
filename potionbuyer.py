@@ -2,7 +2,6 @@ import win32gui
 import win32api
 import win32con
 import win32com.client
-import xlrd
 import time
 import sys
 
