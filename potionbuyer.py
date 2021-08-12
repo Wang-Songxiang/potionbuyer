@@ -6,13 +6,13 @@ import time
 import sys
 
 with open("config.txt", "r", encoding="utf-8") as f:
-    n = int(f.readline().strip("购买次数:"))
+    n = int(f.readline().strip("times:"))
     print(n)
     potion=f.readline()
-    if potion[5]=="是":
+    if potion[7]=="y":
         potion=1
     stone=f.readline()
-    if stone[6]=="是":
+    if stone[6]=="y":
         stone=1
 
 titlename = "PrincessConnectReDive"
@@ -36,7 +36,7 @@ print(int(W*(240/760)))
 time.sleep(0.1)
 i=0
 for i in range(n):
-    time.sleep(1)
+    time.sleep(1.5)
     if potion==1:
         win32api.SetCursorPos((left+int(L*(518/1280)),top+int(W*(240/760))))
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP | win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
@@ -71,7 +71,7 @@ for i in range(n):
     time.sleep(0.5)
     win32api.SetCursorPos((right-int(L*(500/1280)),bottom-int(W*(80/760))))
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP | win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
-    time.sleep(1)
+    time.sleep(2)
     win32api.SetCursorPos((right-int(L*(650/1280)),bottom-int(W*(80/760))))
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP | win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
     if i<n-1:
