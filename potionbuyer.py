@@ -8,7 +8,9 @@ import keyboard
 
 with open("config.txt", "r", encoding="utf-8") as f:
     n = int(f.readline().strip("times:"))
-    print(n)
+    print("购买次数:"+str(n))
+    k = float(f.readline().strip("coefficient of delay:"))
+    print("延时系数:"+str(k))
     potion=f.readline()
     if potion[7]=="y":
         potion=1
@@ -26,6 +28,7 @@ win32gui.SetForegroundWindow(hwnd)
 # win32gui.ShowWindow(hwnd, win32con.SW_MAXIMIZE)
 print("这是一个自动买药的脚本")
 print("请确保以管理员身份运行，并且游戏（dmm版）已打开在商店页面")
+print("若出现延时不足导致点错的问题，到config内自行调整延时时间")
 print("希望停下来时摁住s直到脚本关闭")
 
 L=right-left
@@ -41,10 +44,11 @@ p3x=left+int(L*(972/1280))
 p4x=left+int(L*(1200/1280))
 px=[p1x,p2x,p3x,p4x]
 f=0
+t=0
 for i in range(n):
     if keyboard.is_pressed('s') or f==1:
         break
-    time.sleep(1.5)
+    time.sleep(1.5*k)
     if potion==1:
         for x in range(4):
             win32api.SetCursorPos((px[x],p1y))
@@ -70,22 +74,24 @@ for i in range(n):
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP | win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
     if keyboard.is_pressed('s') or f==1:
         break
-    time.sleep(0.5)
+    time.sleep(0.5*k)
     win32api.SetCursorPos((right-int(L*(500/1280)),bottom-int(W*(80/760))))
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP | win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
     if keyboard.is_pressed('s') or f==1:
         break
-    time.sleep(2)
+    time.sleep(2*k)
     win32api.SetCursorPos((right-int(L*(650/1280)),bottom-int(W*(80/760))))
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP | win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
+    t=i+1
+    print("已经购买"+str(t)+"次")
     if keyboard.is_pressed('s') or f==1:
         break
     if i<n-1:
-        time.sleep(1)
+        time.sleep(1*k)
         win32api.SetCursorPos((right-int(L*(500/1280)),bottom-int(W*(140/760))))
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP | win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
         if keyboard.is_pressed('s') or f==1:
             break
-        time.sleep(0.5)
+        time.sleep(0.5*k)
         win32api.SetCursorPos((right-int(L*(500/1280)),bottom-int(W*(230/760))))
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP | win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
